@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El paseo 8</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* HERO SECTION */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:60px 8%;
+  background:url('https://www.themoviedb.org/t/p/original/kXeUzmOMqdySaeknuuYUTHzMC8H.jpg') center/cover no-repeat;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to right, rgba(0,0,0,0.95) 25%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0.2));
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  display:flex;
+  gap:50px;
+  align-items:center;
+  max-width:1200px;
+  width:100%;
+}
+
+/* POSTER */
+.poster{
+  width:280px;
+  border-radius:20px;
+  box-shadow:0 25px 50px rgba(0,0,0,0.8);
+  transition:.4s;
+}
+
+.poster:hover{
+  transform:scale(1.05);
+}
+
+/* INFO */
+.info{
+  max-width:600px;
+}
+
+.title{
+  font-size:55px;
+  font-weight:800;
+  background:linear-gradient(45deg,#ff416c,#ff4b2b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+}
+
+.meta{
+  margin-bottom:15px;
+  opacity:.85;
+}
+
+.tags span{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:30px;
+  margin-right:10px;
+  margin-top:10px;
+  font-size:13px;
+  background:linear-gradient(45deg,#00c6ff,#0072ff);
+}
+
+.description{
+  margin-top:20px;
+  line-height:1.6;
+  opacity:.9;
+}
+
+/* PLAY BUTTON */
+.play-btn{
+  margin-top:30px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 30px;
+  background:linear-gradient(45deg,#ff416c,#ff4b2b);
+  border-radius:50px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.3s;
+}
+
+.play-btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px rgba(255,75,43,0.7);
+}
+
+/* PLAYER OVERLAY */
+.player-overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.player-overlay iframe{
+  width:100%;
+  height:100%;
+}
+
+.close-btn{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:30px;
+  cursor:pointer;
+  z-index:10000;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+  .hero-content{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .poster{
+    width:220px;
+  }
+
+  .title{
+    font-size:38px;
+  }
+
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+
+    <img class="poster"
+    src="https://www.themoviedb.org/t/p/w500/oP4BuJ4toBC5KLczNy9c38cMgbr.jpg">
+
+    <div class="info">
+      <h1 class="title">El paseo 8</h1>
+
+      <div class="meta">
+        2025 • 1h 31m • Estreno 25 Diciembre
+      </div>
+
+      <div class="tags">
+        <span>Comedia</span>
+        <span>HD</span>
+        <span>1080p</span>
+      </div>
+
+      <div class="description">
+        Una boda inesperada desata una nueva aventura llena de caos familiar,
+        situaciones absurdas y momentos divertidos que convertirán este paseo
+        en uno de los más inolvidables de la saga.
+      </div>
+
+      <div class="play-btn" onclick="openPlayer()">
+        ▶ Ver Película
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PLAYER -->
+<div class="player-overlay" id="overlay">
+  <div class="close-btn" onclick="closePlayer()">✕</div>
+  <iframe id="movieFrame"
+    frameborder="0"
+    allow="autoplay; fullscreen"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+const videoURL = "https://lancewhosedifficult.com/e/8gvuwv6ibejz";
+
+function openPlayer(){
+  const overlay = document.getElementById("overlay");
+  const iframe = document.getElementById("movieFrame");
+
+  iframe.src = videoURL + "?autoplay=1";
+  overlay.style.display = "flex";
+
+  setTimeout(()=>{
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    }
+  },400);
+}
+
+function closePlayer(){
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("movieFrame").src = "";
+}
+</script>
+
+</body>
+</html>
