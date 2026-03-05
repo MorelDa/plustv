@@ -205,7 +205,8 @@ body{
 </div>
 
 <script>
-const videoURL = "https://lancewhosedifficult.com/e/8gvuwv6ibejz";
+// Enlace de Google Drive en modo "preview"
+const videoURL = "https://drive.google.com/file/d/1SL8AANNLd6nELYNg0yg0D5VaXEpHyyRt/preview";
 
 function openPlayer(){
   const overlay = document.getElementById("overlay");
@@ -224,6 +225,24 @@ function openPlayer(){
 function closePlayer(){
   document.getElementById("overlay").style.display = "none";
   document.getElementById("movieFrame").src = "";
+}
+
+// BLOQUEO DE CLICK DERECHO Y TECLAS DE INSPECCIÓN
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  // Bloquea F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+C
+  if(e.key === "F12" || 
+     (e.ctrlKey && e.shiftKey && ["I","C","J"].includes(e.key.toUpperCase())) ||
+     (e.ctrlKey && e.key.toUpperCase() === "U")
+  ){
+    e.preventDefault();
+    alert("Esta acción está bloqueada.");
+  }
+});
+
+// Evitar abrir inspector con clic derecho en iframe
+document.getElementById('overlay').onmousedown = function(e){
+  if(e.button == 2) return false;
 }
 </script>
 
